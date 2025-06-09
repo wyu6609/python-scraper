@@ -10,8 +10,6 @@ This Python script scrapes **quotes and their authors** from a demo website: [ht
 
 A **web scraper** is a program that automatically extracts data from websites. It reads the HTML content of a page, locates specific elements (like titles, prices, or text), and processes that information for analysis or storage.
 
-> ⚠️ Always ensure your scraping follows the site's `robots.txt` and terms of service.
-
 ---
 
 ## ▶️ How to Run the Script
