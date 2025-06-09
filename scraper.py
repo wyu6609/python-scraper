@@ -1,58 +1,23 @@
-import requests
-from bs4 import BeautifulSoup
-import csv
-import time
-import random
+import argparse
+import logging
+from scraper_utils import scrape_quotes
+from output_utils import save_to_csv, save_to_json
 
-BASE_URL = "https://quotes.toscrape.com/page/{}/"
-HEADERS = {
-    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64)"
-}
+def main():
+    parser = argparse.ArgumentParser(description="Scrape quotes.toscrape.com")
+    parser.add_argument('--pages', type=int, default=5, help='Number of pages to scrape')
+    parser.add_argument('--out', type=str, default='quotes.csv', help='Output file name')
+    parser.add_argument('--format', choices=['csv', 'json'], default='csv', help='Output format')
+    args = parser.parse_args()
 
-def scrape_quotes(max_pages=5, delay_range=(1, 3)):
-    all_quotes = []
+    logging.basicConfig(level=logging.INFO, format='%(asctime)s — %(levelname)s — %(message)s')
 
-    for page_num in range(1, max_pages + 1):
-        url = BASE_URL.format(page_num)
-        print(f"Scraping: {url}")
+    quotes = scrape_quotes(max_pages=args.pages)
 
-        try:
-            response = requests.get(url, headers=HEADERS, timeout=10)
-            response.raise_for_status()
-        except requests.RequestException as e:
-            print(f"⚠️ Request failed: {e}")
-            break
+    if args.format == 'csv':
+        save_to_csv(quotes, args.out)
+    else:
+        save_to_json(quotes, args.out)
 
-        soup = BeautifulSoup(response.text, "html.parser")
-        quotes = soup.find_all("div", class_="quote")
-
-        if not quotes:
-            print("No more quotes found. Stopping.")
-            break
-
-        for quote in quotes:
-            text = quote.find("span", class_="text").get_text(strip=True)
-            author = quote.find("small", class_="author").get_text(strip=True)
-            tags = [tag.get_text() for tag in quote.find_all("a", class_="tag")]
-            all_quotes.append({"text": text, "author": author, "tags": ", ".join(tags)})
-
-        # Be polite
-        time.sleep(random.uniform(*delay_range))
-
-    return all_quotes
-
-def save_to_csv(quotes, filename="quotes.csv"):
-    if not quotes:
-        print("No quotes to save.")
-        return
-
-    with open(filename, mode='w', newline='', encoding='utf-8') as csv_file:
-        fieldnames = ["text", "author", "tags"]
-        writer = csv.DictWriter(csv_file, fieldnames=fieldnames)
-        writer.writeheader()
-        writer.writerows(quotes)
-    print(f"✅ Saved {len(quotes)} quotes to {filename}")
-
-if __name__ == "__main__":
-    quotes = scrape_quotes(max_pages=10)  # You can change the page limit
-    save_to_csv(quotes)
+if __name__ == '__main__':
+    main()

@@ -1,44 +1,37 @@
-# 🕷️ Python Web Scraper – Quotes Edition
+# 🕷️ Python Quote Web Scraper
 
-## 📌 What is This?
+## 📌 Overview
 
-This Python script scrapes **quotes, authors, and tags** from [https://quotes.toscrape.com](https://quotes.toscrape.com), a website made for practicing web scraping.  
-It goes through **multiple pages** of quotes and saves the data into a structured **CSV file**.
+A modular Python web scraper that extracts quotes, authors, and tags from [https://quotes.toscrape.com](https://quotes.toscrape.com), with support for:
 
----
-
-## ❓ What is a Web Scraper?
-
-A **web scraper** is a tool that programmatically visits a website, reads its content (HTML), and extracts specific data like text, prices, or titles.  
-This is often used for:
-- Market research  
-- Competitive analysis  
-- Data aggregation  
-- Academic research  
----
-
-## ▶️ Features
-
-✅ Scrapes multiple pages (with page limit)  
-✅ Extracts quote text, author, and tags  
-✅ Saves results to `quotes.csv`  
-✅ Handles network errors and empty pages  
-✅ Mimics a real browser with headers  
-✅ Adds random delay between requests to avoid getting banned
+- Multiple pages
+- CSV or JSON output
+- Command-line arguments
+- Retry logic, logging, and polite scraping
 
 ---
 
 ## 🚀 How to Run
 
-### 1. Clone or Download the Script
+### 1. Clone the Repo or Download Files
 
-Save the main file as `scraper.py`.
+```bash
+git clone git@github.com:wyu6609/python-scraper.git
+cd python-scraper
+```
 
 ### 2. Install Required Python Packages
 
 ```bash
-pip install requests beautifulsoup4
+pip install -r requirements.txt
 ```
+### 🚀 Usage
+In terminal run:
+```
+python scraper.py --pages 10 --format json --out results.json 
+python scraper.py --pages 10 --format csv --out results.csv
+```
+
 ### DEMO 
 
 <p align="center"><img src = "public/demo1.gif"/></p>
