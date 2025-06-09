@@ -27,3 +27,7 @@ Run this in your terminal:
 ```bash
 pip install requests beautifulsoup4
 ```
+
+## DEMO
+
+<p align="center"><img src = "public/demo.gif"/></p>
