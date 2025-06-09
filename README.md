@@ -1,4 +1,4 @@
-# 🕷️ Python Quote Web Scraper
+# 🕷️ Python Web Scraper
 
 ## 📌 Overview
 
