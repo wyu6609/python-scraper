@@ -39,6 +39,6 @@ Save the main file as `scraper.py`.
 ```bash
 pip install requests beautifulsoup4
 ```
-### DEMO Add commentMore actions
+### DEMO 
 
 <p align="center"><img src = "public/demo1.gif"/></p>
