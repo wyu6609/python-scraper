@@ -34,4 +34,4 @@ python scraper.py --pages 10 --format csv --out results.csv
 
 ### DEMO 
 
-<p align="center"><img src = "public/demo1.gif"/></p>
+<p align="center"><img src = "public/demo.gif"/></p>
